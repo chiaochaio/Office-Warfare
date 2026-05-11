@@ -65,6 +65,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -78,6 +79,57 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Blue_Boss_7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Blue_GM_6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Blue_Manager_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Blue_Leader_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Blue_Senior_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Blue_Junior_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Blue_Intern_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Red_Boss_7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Red_GM_6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Red_Manager_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Red_Leader_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Red_Senior_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Red_Junior_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Red_Intern_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tile_Back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tile_Empty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tile_Selected.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

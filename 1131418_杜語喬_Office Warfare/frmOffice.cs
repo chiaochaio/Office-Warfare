@@ -32,6 +32,9 @@ namespace _1131418_杜語喬_Office_Warfare
         // 玩家 1 所屬陣營：0 = 未定, 1 = 紅, -1 = 藍
         private int p1Side = 0;
 
+        // 紀錄目前選中棋子的索引，預設 -1
+        private int selectedIndex = -1;
+
         public frmOffice()
         {
             InitializeComponent();
@@ -133,26 +136,180 @@ namespace _1131418_杜語喬_Office_Warfare
             System.Diagnostics.Debug.WriteLine($"  - 已翻: {isFlipped[index]}");
             System.Diagnostics.Debug.WriteLine($"  - 棋子值: {boardData[index]}");
 
-            if (isFlipped[index])
+            // ========== 翻牌邏輯 ==========
+            if (!isFlipped[index])
             {
-                System.Diagnostics.Debug.WriteLine($"  - 跳過（已翻過）");
+                isFlipped[index] = true;
+
+                if (p1Side == 0)
+                {
+                    p1Side = boardData[index] > 0 ? 1 : -1;
+                    System.Diagnostics.Debug.WriteLine($"  - 設定玩家1陣營: {(p1Side == 1 ? "紅" : "藍")}");
+                }
+
+                LoadTileImage(index);
+                
+                currentPlayer = (currentPlayer == 1) ? 2 : 1;
+                UpdatePlayerStatus();
+                
+                System.Diagnostics.Debug.WriteLine($"  - 現在輪到玩家 {currentPlayer}");
                 return;
             }
 
-            isFlipped[index] = true;
+            // ========== 選取棋子邏輯 ==========
+            int currentPlayerSide = GetCurrentPlayerSide();
 
-            if (p1Side == 0)
+            // 若點擊已翻開的棋子且屬於當前玩家
+            if (isFlipped[index] && boardData[index] != 0)
             {
-                p1Side = boardData[index] > 0 ? 1 : -1;
-                System.Diagnostics.Debug.WriteLine($"  - 設定玩家1陣營: {(p1Side == 1 ? "紅" : "藍")}");
+                int tileOwner = boardData[index] > 0 ? 1 : -1;
+                if (tileOwner == currentPlayerSide)
+                {
+                    selectedIndex = index;
+                    System.Diagnostics.Debug.WriteLine($"  - 選中棋子 [{index}]");
+
+                    // 清空所有背景圖片
+                    for (int i = 0; i < 16; i++)
+                        pbTiles[i].BackgroundImage = null;
+
+                    // 高亮選中的棋子（疊加在棋子圖片上）
+                    pbTiles[index].BackgroundImage = Properties.Resources.Tile_Selected;
+                    pbTiles[index].BackgroundImageLayout = ImageLayout.Zoom;
+                    return;
+                }
             }
 
-            LoadTileImage(index);
-            
-            currentPlayer = (currentPlayer == 1) ? 2 : 1;
-            UpdatePlayerStatus();
-            
-            System.Diagnostics.Debug.WriteLine($"  - 現在輪到玩家 {currentPlayer}");
+            // ========== 移動與吃子邏輯 ==========
+            if (selectedIndex != -1 && IsAdjacent(selectedIndex, index))
+            {
+                System.Diagnostics.Debug.WriteLine($"  - 從 [{selectedIndex}] 移動到 [{index}]");
+
+                int attacker = boardData[selectedIndex];
+                int defender = boardData[index];
+
+                bool actionSuccess = false;
+
+                // 目標格為空 - 移動
+                if (defender == 0)
+                {
+                    boardData[index] = attacker;
+                    boardData[selectedIndex] = 0;
+                    LoadTileImage(index);
+                    pbTiles[selectedIndex].Image = Properties.Resources.Tile_Empty;
+                    
+                    System.Diagnostics.Debug.WriteLine($"  - 棋子移動到 [{index}]");
+                    // TODO: Play Sfx_Move
+
+                    actionSuccess = true;
+                }
+                // 目標格有敵方棋子 - 吃子判定
+                else if ((attacker > 0 && defender < 0) || (attacker < 0 && defender > 0))
+                {
+                    int levelA = Math.Abs(attacker);
+                    int levelB = Math.Abs(defender);
+
+                    bool attackSuccess = false;
+
+                    // 規則 A：大吃小
+                    if (levelA >= levelB)
+                    {
+                        attackSuccess = true;
+                    }
+
+                    // 規則 B：實習生逆襲（1吃7）
+                    if (levelA == 1 && levelB == 7)
+                    {
+                        attackSuccess = true;
+                    }
+
+                    if (attackSuccess)
+                    {
+                        // 規則 C：同級消失
+                        if (levelA == levelB)
+                        {
+                            System.Diagnostics.Debug.WriteLine($"  - 同級對戰！雙方同歸於盡");
+                            boardData[selectedIndex] = 0;
+                            boardData[index] = 0;
+                            pbTiles[selectedIndex].Image = Properties.Resources.Tile_Empty;
+                            pbTiles[index].Image = Properties.Resources.Tile_Empty;
+                            // TODO: Play Voice_Eat
+                        }
+                        else
+                        {
+                            System.Diagnostics.Debug.WriteLine($"  - 攻擊成功！Lv{levelA} 吃掉 Lv{levelB}");
+                            boardData[index] = attacker;
+                            boardData[selectedIndex] = 0;
+                            LoadTileImage(index);
+                            pbTiles[selectedIndex].Image = Properties.Resources.Tile_Empty;
+                            // TODO: Play Voice_Eat
+                        }
+
+                        actionSuccess = true;
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine($"  - 攻擊失敗！Lv{levelA} 無法吃掉 Lv{levelB}");
+                        // 攻擊失敗，不算有效回合
+                    }
+                }
+                else
+                {
+                    // 目標格為自己的棋子，取消選擇
+                    System.Diagnostics.Debug.WriteLine($"  - 目標是自己的棋子，取消選擇");
+                }
+
+                // 清空高亮
+                ClearSelection();
+
+                // 只在有效動作時才切換玩家
+                if (actionSuccess)
+                {
+                    currentPlayer = (currentPlayer == 1) ? 2 : 1;
+                    UpdatePlayerStatus();
+                }
+            }
+            else if (selectedIndex != -1 && index != selectedIndex)
+            {
+                System.Diagnostics.Debug.WriteLine($"  - 目標不相鄰，取消選擇");
+                ClearSelection();
+            }
+        }
+
+        /// <summary>
+        /// 清空棋子選擇狀態
+        /// </summary>
+        private void ClearSelection()
+        {
+            selectedIndex = -1;
+            for (int i = 0; i < 16; i++)
+                pbTiles[i].BackgroundImage = null;
+        }
+
+        /// <summary>
+        /// 取得目前玩家的陣營（1 = 紅方，-1 = 藍方）
+        /// </summary>
+        private int GetCurrentPlayerSide()
+        {
+            if (currentPlayer == 1)
+                return p1Side;
+            else
+                return p1Side == 1 ? -1 : 1;
+        }
+
+        /// <summary>
+        /// 判斷一維陣列索引在 4x4 棋盤中是否相鄰
+        /// </summary>
+        private bool IsAdjacent(int idx1, int idx2)
+        {
+            int row1 = idx1 / 4;
+            int col1 = idx1 % 4;
+            int row2 = idx2 / 4;
+            int col2 = idx2 % 4;
+
+            int rowDiff = Math.Abs(row1 - row2);
+            int colDiff = Math.Abs(col1 - col2);
+
+            return (rowDiff + colDiff) == 1;
         }
 
         /// <summary>
@@ -190,7 +347,7 @@ namespace _1131418_杜語喬_Office_Warfare
                         break;
                 }
             }
-            else
+            else if (tileValue < 0)
             {
                 switch (Math.Abs(tileValue))
                 {
@@ -238,15 +395,7 @@ namespace _1131418_杜語喬_Office_Warfare
             Color textColor = Color.Black;
 
             // 判斷目前玩家的陣營
-            int currentPlayerSide = 0;
-            if (currentPlayer == 1)
-            {
-                currentPlayerSide = p1Side;
-            }
-            else // currentPlayer == 2
-            {
-                currentPlayerSide = p1Side == 1 ? -1 : 1;
-            }
+            int currentPlayerSide = GetCurrentPlayerSide();
 
             // 根據陣營設定顯示文字和顏色
             if (currentPlayerSide != 0)

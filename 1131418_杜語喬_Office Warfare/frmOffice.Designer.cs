@@ -77,17 +77,17 @@
             this.panel1.Controls.Add(this.btnExplain);
             this.panel1.Controls.Add(this.btnRestart);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(527, 6);
+            this.panel1.Location = new System.Drawing.Point(581, 6);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(241, 584);
+            this.panel1.Size = new System.Drawing.Size(191, 584);
             this.panel1.TabIndex = 1;
             // 
             // btnExplain
             // 
             this.btnExplain.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnExplain.Location = new System.Drawing.Point(38, 435);
+            this.btnExplain.Location = new System.Drawing.Point(38, 79);
             this.btnExplain.Name = "btnExplain";
-            this.btnExplain.Size = new System.Drawing.Size(174, 62);
+            this.btnExplain.Size = new System.Drawing.Size(127, 97);
             this.btnExplain.TabIndex = 1;
             this.btnExplain.Text = "遊戲說明";
             this.btnExplain.UseVisualStyleBackColor = true;
@@ -97,9 +97,9 @@
             // 
             this.btnRestart.BackColor = System.Drawing.Color.Snow;
             this.btnRestart.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.btnRestart.Location = new System.Drawing.Point(38, 503);
+            this.btnRestart.Location = new System.Drawing.Point(38, 182);
             this.btnRestart.Name = "btnRestart";
-            this.btnRestart.Size = new System.Drawing.Size(174, 62);
+            this.btnRestart.Size = new System.Drawing.Size(127, 93);
             this.btnRestart.TabIndex = 0;
             this.btnRestart.Text = "重新開始";
             this.btnRestart.UseVisualStyleBackColor = false;
@@ -112,7 +112,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(6, 6);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(521, 76);
+            this.panel2.Size = new System.Drawing.Size(575, 76);
             this.panel2.TabIndex = 2;
             // 
             // lblStatus
@@ -167,7 +167,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(521, 508);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(575, 508);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
             // pictureBox1
@@ -177,7 +177,7 @@
             this.pictureBox1.Image = global::_1131418_杜語喬_Office_Warfare.Properties.Resources.Tile_Back;
             this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(124, 121);
+            this.pictureBox1.Size = new System.Drawing.Size(137, 121);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -187,9 +187,9 @@
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox2.Image = global::_1131418_杜語喬_Office_Warfare.Properties.Resources.Tile_Back;
-            this.pictureBox2.Location = new System.Drawing.Point(133, 3);
+            this.pictureBox2.Location = new System.Drawing.Point(146, 3);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(124, 121);
+            this.pictureBox2.Size = new System.Drawing.Size(137, 121);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 1;
             this.pictureBox2.TabStop = false;
@@ -199,9 +199,9 @@
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox3.Image = global::_1131418_杜語喬_Office_Warfare.Properties.Resources.Tile_Back;
-            this.pictureBox3.Location = new System.Drawing.Point(263, 3);
+            this.pictureBox3.Location = new System.Drawing.Point(289, 3);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(124, 121);
+            this.pictureBox3.Size = new System.Drawing.Size(137, 121);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 2;
             this.pictureBox3.TabStop = false;
@@ -211,9 +211,9 @@
             this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox4.Image = global::_1131418_杜語喬_Office_Warfare.Properties.Resources.Tile_Back;
-            this.pictureBox4.Location = new System.Drawing.Point(393, 3);
+            this.pictureBox4.Location = new System.Drawing.Point(432, 3);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(125, 121);
+            this.pictureBox4.Size = new System.Drawing.Size(140, 121);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox4.TabIndex = 3;
             this.pictureBox4.TabStop = false;
@@ -225,7 +225,7 @@
             this.pictureBox5.Image = global::_1131418_杜語喬_Office_Warfare.Properties.Resources.Tile_Back;
             this.pictureBox5.Location = new System.Drawing.Point(3, 130);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(124, 121);
+            this.pictureBox5.Size = new System.Drawing.Size(137, 121);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox5.TabIndex = 4;
             this.pictureBox5.TabStop = false;
@@ -235,9 +235,9 @@
             this.pictureBox6.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox6.Image = global::_1131418_杜語喬_Office_Warfare.Properties.Resources.Tile_Back;
-            this.pictureBox6.Location = new System.Drawing.Point(133, 130);
+            this.pictureBox6.Location = new System.Drawing.Point(146, 130);
             this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(124, 121);
+            this.pictureBox6.Size = new System.Drawing.Size(137, 121);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox6.TabIndex = 5;
             this.pictureBox6.TabStop = false;
@@ -247,9 +247,9 @@
             this.pictureBox7.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox7.Image = global::_1131418_杜語喬_Office_Warfare.Properties.Resources.Tile_Back;
-            this.pictureBox7.Location = new System.Drawing.Point(263, 130);
+            this.pictureBox7.Location = new System.Drawing.Point(289, 130);
             this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(124, 121);
+            this.pictureBox7.Size = new System.Drawing.Size(137, 121);
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox7.TabIndex = 6;
             this.pictureBox7.TabStop = false;
@@ -259,9 +259,9 @@
             this.pictureBox8.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox8.Image = global::_1131418_杜語喬_Office_Warfare.Properties.Resources.Tile_Back;
-            this.pictureBox8.Location = new System.Drawing.Point(393, 130);
+            this.pictureBox8.Location = new System.Drawing.Point(432, 130);
             this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(125, 121);
+            this.pictureBox8.Size = new System.Drawing.Size(140, 121);
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox8.TabIndex = 7;
             this.pictureBox8.TabStop = false;
@@ -273,7 +273,7 @@
             this.pictureBox9.Image = global::_1131418_杜語喬_Office_Warfare.Properties.Resources.Tile_Back;
             this.pictureBox9.Location = new System.Drawing.Point(3, 257);
             this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(124, 121);
+            this.pictureBox9.Size = new System.Drawing.Size(137, 121);
             this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox9.TabIndex = 8;
             this.pictureBox9.TabStop = false;
@@ -283,9 +283,9 @@
             this.pictureBox10.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox10.Image = global::_1131418_杜語喬_Office_Warfare.Properties.Resources.Tile_Back;
-            this.pictureBox10.Location = new System.Drawing.Point(133, 257);
+            this.pictureBox10.Location = new System.Drawing.Point(146, 257);
             this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(124, 121);
+            this.pictureBox10.Size = new System.Drawing.Size(137, 121);
             this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox10.TabIndex = 9;
             this.pictureBox10.TabStop = false;
@@ -295,9 +295,9 @@
             this.pictureBox11.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox11.Image = global::_1131418_杜語喬_Office_Warfare.Properties.Resources.Tile_Back;
-            this.pictureBox11.Location = new System.Drawing.Point(263, 257);
+            this.pictureBox11.Location = new System.Drawing.Point(289, 257);
             this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(124, 121);
+            this.pictureBox11.Size = new System.Drawing.Size(137, 121);
             this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox11.TabIndex = 10;
             this.pictureBox11.TabStop = false;
@@ -307,9 +307,9 @@
             this.pictureBox12.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox12.Image = global::_1131418_杜語喬_Office_Warfare.Properties.Resources.Tile_Back;
-            this.pictureBox12.Location = new System.Drawing.Point(393, 257);
+            this.pictureBox12.Location = new System.Drawing.Point(432, 257);
             this.pictureBox12.Name = "pictureBox12";
-            this.pictureBox12.Size = new System.Drawing.Size(125, 121);
+            this.pictureBox12.Size = new System.Drawing.Size(140, 121);
             this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox12.TabIndex = 11;
             this.pictureBox12.TabStop = false;
@@ -321,7 +321,7 @@
             this.pictureBox13.Image = global::_1131418_杜語喬_Office_Warfare.Properties.Resources.Tile_Back;
             this.pictureBox13.Location = new System.Drawing.Point(3, 384);
             this.pictureBox13.Name = "pictureBox13";
-            this.pictureBox13.Size = new System.Drawing.Size(124, 121);
+            this.pictureBox13.Size = new System.Drawing.Size(137, 121);
             this.pictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox13.TabIndex = 12;
             this.pictureBox13.TabStop = false;
@@ -331,9 +331,9 @@
             this.pictureBox14.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox14.Image = global::_1131418_杜語喬_Office_Warfare.Properties.Resources.Tile_Back;
-            this.pictureBox14.Location = new System.Drawing.Point(133, 384);
+            this.pictureBox14.Location = new System.Drawing.Point(146, 384);
             this.pictureBox14.Name = "pictureBox14";
-            this.pictureBox14.Size = new System.Drawing.Size(124, 121);
+            this.pictureBox14.Size = new System.Drawing.Size(137, 121);
             this.pictureBox14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox14.TabIndex = 13;
             this.pictureBox14.TabStop = false;
@@ -343,9 +343,9 @@
             this.pictureBox15.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox15.Image = global::_1131418_杜語喬_Office_Warfare.Properties.Resources.Tile_Back;
-            this.pictureBox15.Location = new System.Drawing.Point(263, 384);
+            this.pictureBox15.Location = new System.Drawing.Point(289, 384);
             this.pictureBox15.Name = "pictureBox15";
-            this.pictureBox15.Size = new System.Drawing.Size(124, 121);
+            this.pictureBox15.Size = new System.Drawing.Size(137, 121);
             this.pictureBox15.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox15.TabIndex = 14;
             this.pictureBox15.TabStop = false;
@@ -355,9 +355,9 @@
             this.pictureBox16.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox16.Image = global::_1131418_杜語喬_Office_Warfare.Properties.Resources.Tile_Back;
-            this.pictureBox16.Location = new System.Drawing.Point(393, 384);
+            this.pictureBox16.Location = new System.Drawing.Point(432, 384);
             this.pictureBox16.Name = "pictureBox16";
-            this.pictureBox16.Size = new System.Drawing.Size(125, 121);
+            this.pictureBox16.Size = new System.Drawing.Size(140, 121);
             this.pictureBox16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox16.TabIndex = 15;
             this.pictureBox16.TabStop = false;
@@ -367,12 +367,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Sienna;
-            this.ClientSize = new System.Drawing.Size(774, 596);
+            this.ClientSize = new System.Drawing.Size(778, 596);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MinimumSize = new System.Drawing.Size(600, 500);
             this.Name = "frmOffice";
             this.Padding = new System.Windows.Forms.Padding(6);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

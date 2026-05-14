@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace _1131418_杜語喬_Office_Warfare
 {
@@ -34,6 +35,9 @@ namespace _1131418_杜語喬_Office_Warfare
 
         // 紀錄目前選中棋子的索引，預設 -1
         private int selectedIndex = -1;
+
+        // 音效播放器（全域，用於管理當前播放的音效）
+        private SoundPlayer currentSoundPlayer = null;
 
         public frmOffice()
         {
@@ -122,6 +126,56 @@ namespace _1131418_杜語喬_Office_Warfare
                 pbTiles[i].Image = Properties.Resources.Tile_Back;
             
             System.Diagnostics.Debug.WriteLine("洗牌完成");
+            
+            // 播放遊戲開局語音
+            PlaySound(Properties.Resources.Sys_GameStart);
+        }
+
+        /// <summary>
+        /// 播放音效的輔助方法（新音效優先，會中斷前一個音效）
+        /// </summary>
+        private void PlaySound(System.IO.Stream soundStream)
+        {
+            if (soundStream == null)
+            {
+                System.Diagnostics.Debug.WriteLine("警告：音效資源為空或不存在");
+                return;
+            }
+
+            try
+            {
+                // 停止前一個音效
+                if (currentSoundPlayer != null)
+                {
+                    try
+                    {
+                        currentSoundPlayer.Stop();
+                    }
+                    catch { }
+                }
+
+                // 在背景執行緒播放新音效
+                System.Threading.Thread thread = new System.Threading.Thread(() =>
+                {
+                    try
+                    {
+                        SoundPlayer player = new SoundPlayer();
+                        currentSoundPlayer = player; // 記錄當前播放器
+                        player.Stream = soundStream;
+                        player.PlaySync(); // 同步播放到完成
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"背景音效播放出錯：{ex.Message}");
+                    }
+                });
+                thread.IsBackground = true;
+                thread.Start();
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"播放音效時出錯：{ex.Message}");
+            }
         }
 
         /// <summary>
@@ -151,6 +205,9 @@ namespace _1131418_杜語喬_Office_Warfare
                 
                 currentPlayer = (currentPlayer == 1) ? 2 : 1;
                 UpdatePlayerStatus();
+                
+                // 播放回合切換語音
+                PlayTurnSound();
                 
                 System.Diagnostics.Debug.WriteLine($"  - 現在輪到玩家 {currentPlayer}");
                 return;
@@ -198,7 +255,6 @@ namespace _1131418_杜語喬_Office_Warfare
                     pbTiles[selectedIndex].Image = Properties.Resources.Tile_Empty;
                     
                     System.Diagnostics.Debug.WriteLine($"  - 棋子移動到 [{index}]");
-                    // TODO: Play Sfx_Move
 
                     actionSuccess = true;
                 }
@@ -232,7 +288,8 @@ namespace _1131418_杜語喬_Office_Warfare
                             boardData[index] = 0;
                             pbTiles[selectedIndex].Image = Properties.Resources.Tile_Empty;
                             pbTiles[index].Image = Properties.Resources.Tile_Empty;
-                            // TODO: Play Voice_Eat
+                            // 播放平手音效
+                            PlaySound(Properties.Resources.Voice_Eat_Tie);
                         }
                         else
                         {
@@ -241,7 +298,12 @@ namespace _1131418_杜語喬_Office_Warfare
                             boardData[selectedIndex] = 0;
                             LoadTileImage(index);
                             pbTiles[selectedIndex].Image = Properties.Resources.Tile_Empty;
-                            // TODO: Play Voice_Eat
+                            
+                            // 實習生逆襲特殊音效
+                            if (levelA == 1 && levelB == 7)
+                            {
+                                PlaySound(Properties.Resources.Voice_Eat_Counter);
+                            }
                         }
 
                         actionSuccess = true;
@@ -266,6 +328,9 @@ namespace _1131418_杜語喬_Office_Warfare
                 {
                     currentPlayer = (currentPlayer == 1) ? 2 : 1;
                     UpdatePlayerStatus();
+                    
+                    // 播放回合切換語音
+                    PlayTurnSound();
                 }
             }
             else if (selectedIndex != -1 && index != selectedIndex)
@@ -276,6 +341,24 @@ namespace _1131418_杜語喬_Office_Warfare
 
             // 檢查遊戲是否結束
             CheckGameOver();
+        }
+
+        /// <summary>
+        /// 播放回合切換語音
+        /// </summary>
+        private void PlayTurnSound()
+        {
+            // 根據 lblStatus 的文字顏色來決定播放哪個語音
+            if (lblStatus.ForeColor == Color.Red)
+            {
+                // 紅色文字 = 紅方回合
+                PlaySound(Properties.Resources.Sys_TurnRed);
+            }
+            else if (lblStatus.ForeColor == Color.Blue)
+            {
+                // 藍色文字 = 藍方回合
+                PlaySound(Properties.Resources.Sys_TurnBlue);
+            }
         }
 
         /// <summary>
@@ -421,6 +504,9 @@ namespace _1131418_杜語喬_Office_Warfare
 
         private void btnExplain_Click(object sender, EventArgs e)
         {
+            // 播放讀取規章語音
+            PlaySound(Properties.Resources.Sys_ReadRules);
+            
             string rules = "【公司職級之戰 - 雇用規則】\n\n" +
                    "1. 首先，翻開任意一張牌以決定您的陣營 (紅方/藍方)。\n" +
                    "2. 每回合，您可以翻開一張牌或是移動一格。\n" +
@@ -453,7 +539,8 @@ namespace _1131418_杜語喬_Office_Warfare
             if (redCount == 0)
             {
                 System.Diagnostics.Debug.WriteLine("========== 遊戲結束：藍方獲勝 ==========");
-                // TODO: Play Voice_Win
+                // 播放藍方勝利語音
+                PlaySound(Properties.Resources.Voice_WinBlue);
                 MessageBox.Show("藍方獲勝！", "遊戲結束");
                 RestartGame();
                 return;
@@ -462,7 +549,8 @@ namespace _1131418_杜語喬_Office_Warfare
             if (blueCount == 0)
             {
                 System.Diagnostics.Debug.WriteLine("========== 遊戲結束：紅方獲勝 ==========");
-                // TODO: Play Voice_Win
+                // 播放紅方勝利語音
+                PlaySound(Properties.Resources.Voice_WinRed);
                 MessageBox.Show("紅方獲勝！", "遊戲結束");
                 RestartGame();
                 return;
@@ -472,7 +560,6 @@ namespace _1131418_杜語喬_Office_Warfare
             if (IsGameStalemate())
             {
                 System.Diagnostics.Debug.WriteLine("========== 遊戲結束：僵局 ==========");
-                // TODO: Play Voice_Win
                 MessageBox.Show($"遊戲無法繼續！玩家 {currentPlayer} 無法移動。", "遊戲結束");
                 RestartGame();
             }
@@ -607,6 +694,9 @@ namespace _1131418_杜語喬_Office_Warfare
         private void btnRestart_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Debug.WriteLine("========== 玩家按下重新開始 ==========");
+            
+            // 播放重置語音
+            PlaySound(Properties.Resources.Sys_ResetGame);
             
             // 清空選擇狀態
             ClearSelection();

@@ -131,5 +131,32 @@
   <ItemGroup>
     <None Include="Resources\Tile_Selected.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sys_GameStart.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sys_ReadRules.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sys_ResetGame.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sys_TurnBlue.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Sys_TurnRed.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Voice_Eat_Counter.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Voice_Eat_Tie.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Voice_WinBlue.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Voice_WinRed.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

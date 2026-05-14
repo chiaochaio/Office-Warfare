@@ -201,6 +201,51 @@ namespace _1131418_杜語喬_Office_Warfare.Properties {
         }
         
         /// <summary>
+        ///   查詢類似 System.IO.MemoryStream 的類型 System.IO.UnmanagedMemoryStream 當地語系化資源。
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Sys_GameStart {
+            get {
+                return ResourceManager.GetStream("Sys_GameStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 System.IO.MemoryStream 的類型 System.IO.UnmanagedMemoryStream 當地語系化資源。
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Sys_ReadRules {
+            get {
+                return ResourceManager.GetStream("Sys_ReadRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 System.IO.MemoryStream 的類型 System.IO.UnmanagedMemoryStream 當地語系化資源。
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Sys_ResetGame {
+            get {
+                return ResourceManager.GetStream("Sys_ResetGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 System.IO.MemoryStream 的類型 System.IO.UnmanagedMemoryStream 當地語系化資源。
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Sys_TurnBlue {
+            get {
+                return ResourceManager.GetStream("Sys_TurnBlue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 System.IO.MemoryStream 的類型 System.IO.UnmanagedMemoryStream 當地語系化資源。
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Sys_TurnRed {
+            get {
+                return ResourceManager.GetStream("Sys_TurnRed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
         internal static System.Drawing.Bitmap Tile_Back {
@@ -227,6 +272,42 @@ namespace _1131418_杜語喬_Office_Warfare.Properties {
             get {
                 object obj = ResourceManager.GetObject("Tile_Selected", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 System.IO.MemoryStream 的類型 System.IO.UnmanagedMemoryStream 當地語系化資源。
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Voice_Eat_Counter {
+            get {
+                return ResourceManager.GetStream("Voice_Eat_Counter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 System.IO.MemoryStream 的類型 System.IO.UnmanagedMemoryStream 當地語系化資源。
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Voice_Eat_Tie {
+            get {
+                return ResourceManager.GetStream("Voice_Eat_Tie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 System.IO.MemoryStream 的類型 System.IO.UnmanagedMemoryStream 當地語系化資源。
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Voice_WinBlue {
+            get {
+                return ResourceManager.GetStream("Voice_WinBlue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類似 System.IO.MemoryStream 的類型 System.IO.UnmanagedMemoryStream 當地語系化資源。
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Voice_WinRed {
+            get {
+                return ResourceManager.GetStream("Voice_WinRed", resourceCulture);
             }
         }
     }

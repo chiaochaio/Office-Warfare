@@ -273,6 +273,9 @@ namespace _1131418_杜語喬_Office_Warfare
                 System.Diagnostics.Debug.WriteLine($"  - 目標不相鄰，取消選擇");
                 ClearSelection();
             }
+
+            // 檢查遊戲是否結束
+            CheckGameOver();
         }
 
         /// <summary>
@@ -425,6 +428,191 @@ namespace _1131418_杜語喬_Office_Warfare
                    "4. 特殊規則：實習生 (1 級) 能夠吃掉董事長 (7 級)。\n" +
                    "5. 吃光對方所有的棋子便獲勝！";
             MessageBox.Show(rules, "雇用指南");
+        }
+
+        /// <summary>
+        /// 檢查遊戲是否結束
+        /// </summary>
+        private void CheckGameOver()
+        {
+            int redCount = 0;   // 紅方棋子數
+            int blueCount = 0;  // 藍方棋子數
+
+            // 統計剩餘棋子
+            for (int i = 0; i < 16; i++)
+            {
+                if (boardData[i] > 0)
+                    redCount++;
+                else if (boardData[i] < 0)
+                    blueCount++;
+            }
+
+            System.Diagnostics.Debug.WriteLine($"  - 紅方棋子數: {redCount}, 藍方棋子數: {blueCount}");
+
+            // 判定勝負
+            if (redCount == 0)
+            {
+                System.Diagnostics.Debug.WriteLine("========== 遊戲結束：藍方獲勝 ==========");
+                // TODO: Play Voice_Win
+                MessageBox.Show("藍方獲勝！", "遊戲結束");
+                RestartGame();
+                return;
+            }
+
+            if (blueCount == 0)
+            {
+                System.Diagnostics.Debug.WriteLine("========== 遊戲結束：紅方獲勝 ==========");
+                // TODO: Play Voice_Win
+                MessageBox.Show("紅方獲勝！", "遊戲結束");
+                RestartGame();
+                return;
+            }
+
+            // 進階困敵判定：檢查是否無法繼續遊戲
+            if (IsGameStalemate())
+            {
+                System.Diagnostics.Debug.WriteLine("========== 遊戲結束：僵局 ==========");
+                // TODO: Play Voice_Win
+                MessageBox.Show($"遊戲無法繼續！玩家 {currentPlayer} 無法移動。", "遊戲結束");
+                RestartGame();
+            }
+        }
+
+        /// <summary>
+        /// 檢查是否進入僵局（無法移動且無牌可翻）
+        /// </summary>
+        private bool IsGameStalemate()
+        {
+            int currentPlayerSide = GetCurrentPlayerSide();
+            bool hasUnflippedTiles = false;
+            bool canMove = false;
+
+            // 檢查是否還有蓋著的牌
+            for (int i = 0; i < 16; i++)
+            {
+                if (!isFlipped[i])
+                {
+                    hasUnflippedTiles = true;
+                    break;
+                }
+            }
+
+            // 如果還有蓋著的牌，就還能翻牌，遊戲不算僵局
+            if (hasUnflippedTiles)
+                return false;
+
+            // 檢查當前玩家是否有可移動的棋子
+            for (int i = 0; i < 16; i++)
+            {
+                // 找到屬於當前玩家的棋子
+                if (boardData[i] != 0 && isFlipped[i])
+                {
+                    int tileOwner = boardData[i] > 0 ? 1 : -1;
+                    if (tileOwner != currentPlayerSide)
+                        continue;
+
+                    // 檢查四個相鄰方向
+                    int[] adjacentIndices = GetAdjacentIndices(i);
+                    foreach (int adjIndex in adjacentIndices)
+                    {
+                        if (adjIndex == -1)
+                            continue;
+
+                        int adjacentTile = boardData[adjIndex];
+
+                        // 相鄰格為空，可以移動
+                        if (adjacentTile == 0)
+                        {
+                            canMove = true;
+                            break;
+                        }
+
+                        // 相鄰格有敵方棋子，檢查是否能吃
+                        if ((boardData[i] > 0 && adjacentTile < 0) || (boardData[i] < 0 && adjacentTile > 0))
+                        {
+                            int levelA = Math.Abs(boardData[i]);
+                            int levelB = Math.Abs(adjacentTile);
+
+                            // 規則 A：大吃小
+                            if (levelA >= levelB)
+                            {
+                                canMove = true;
+                                break;
+                            }
+
+                            // 規則 B：實習生逆襲
+                            if (levelA == 1 && levelB == 7)
+                            {
+                                canMove = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (canMove)
+                        break;
+                }
+            }
+
+            return !canMove;
+        }
+
+        /// <summary>
+        /// 取得相鄰的四個格子索引
+        /// </summary>
+        private int[] GetAdjacentIndices(int index)
+        {
+            int row = index / 4;
+            int col = index % 4;
+            int[] adjacent = new int[4] { -1, -1, -1, -1 }; // 上、下、左、右
+
+            // 上
+            if (row > 0)
+                adjacent[0] = (row - 1) * 4 + col;
+
+            // 下
+            if (row < 3)
+                adjacent[1] = (row + 1) * 4 + col;
+
+            // 左
+            if (col > 0)
+                adjacent[2] = row * 4 + (col - 1);
+
+            // 右
+            if (col < 3)
+                adjacent[3] = row * 4 + (col + 1);
+
+            return adjacent;
+        }
+
+        /// <summary>
+        /// 重新開局
+        /// </summary>
+        private void RestartGame()
+        {
+            // 重置遊戲狀態
+            selectedIndex = -1;
+            currentPlayer = 1;
+            p1Side = 0;
+
+            // 重新洗牌並初始化
+            ShuffleBoard();
+
+            // 更新玩家狀態顯示
+            UpdatePlayerStatus();
+
+            System.Diagnostics.Debug.WriteLine("========== 遊戲已重新開始 ==========\n");
+        }
+
+        private void btnRestart_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Debug.WriteLine("========== 玩家按下重新開始 ==========");
+            
+            // 清空選擇狀態
+            ClearSelection();
+            
+            // 重新開局
+            RestartGame();
         }
     }
 }

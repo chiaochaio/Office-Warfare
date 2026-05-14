@@ -103,6 +103,7 @@
             this.btnRestart.TabIndex = 0;
             this.btnRestart.Text = "重新開始";
             this.btnRestart.UseVisualStyleBackColor = false;
+            this.btnRestart.Click += new System.EventHandler(this.btnRestart_Click);
             // 
             // panel2
             // 
@@ -118,7 +119,7 @@
             // 
             this.lblStatus.Font = new System.Drawing.Font("微軟正黑體", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.lblStatus.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblStatus.Location = new System.Drawing.Point(133, 20);
+            this.lblStatus.Location = new System.Drawing.Point(133, 24);
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(254, 33);
             this.lblStatus.TabIndex = 1;

@@ -84,9 +84,36 @@ namespace _1131418_杜語喬_Office_Warfare
             // 將按鈕設置到最前面，確保不會被 PictureBox 蓋住
             btnExplain.BringToFront();
             
+            // 設定表單關閉事件
+            this.FormClosing += frmOffice_FormClosing;
+            
             // 初始化玩家狀態顯示
             UpdatePlayerStatus();
             System.Diagnostics.Debug.WriteLine("========== Form_Load 完成 ==========\n");
+        }
+
+        /// <summary>
+        /// 表單關閉事件處理 - 詢問玩家是否確認離開
+        /// </summary>
+        private void frmOffice_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // 只在使用者點擊叉叉時詢問（不是程式自動關閉）
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                DialogResult result = MessageBox.Show(
+                    "確定要離開遊戲嗎？",
+                    "確認離開",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question,
+                    MessageBoxDefaultButton.Button2
+                );
+
+                // 如果選擇 No，取消關閉
+                if (result == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+            }
         }
 
         /// <summary>
@@ -703,6 +730,38 @@ namespace _1131418_杜語喬_Office_Warfare
             
             // 重新開局
             RestartGame();
+        }
+
+        private void btnSurrender_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("確定要遞出辭呈（投降）嗎？這將直接判定對手獲勝！", "離職申請確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                string winnerText = "";
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer();
+
+             
+                if (currentPlayer == 1) 
+                {
+                    winnerText = "紅方";
+                    player.Stream = Properties.Resources.Voice_WinRed; // 讓紅方贏，播紅方語音
+                    
+                }
+                else 
+                {
+                    winnerText = "藍方";
+                    player.Stream = Properties.Resources.Voice_WinBlue; // 讓藍方贏，播藍方語音
+                   
+                }
+               
+
+                player.Play();
+                MessageBox.Show($"由於有人自願離職，判定 {winnerText} 徹底獲勝！", "職場大戰結束");
+              
+                // 重新開局
+                RestartGame();
+            }
         }
     }
 }

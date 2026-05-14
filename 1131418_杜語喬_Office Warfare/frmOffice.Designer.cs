@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnSurrender = new System.Windows.Forms.Button();
             this.btnExplain = new System.Windows.Forms.Button();
             this.btnRestart = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -74,6 +75,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnSurrender);
             this.panel1.Controls.Add(this.btnExplain);
             this.panel1.Controls.Add(this.btnRestart);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
@@ -81,6 +83,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(191, 584);
             this.panel1.TabIndex = 1;
+            // 
+            // btnSurrender
+            // 
+            this.btnSurrender.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.btnSurrender.Location = new System.Drawing.Point(38, 281);
+            this.btnSurrender.Name = "btnSurrender";
+            this.btnSurrender.Size = new System.Drawing.Size(127, 93);
+            this.btnSurrender.TabIndex = 2;
+            this.btnSurrender.Text = "投降";
+            this.btnSurrender.UseVisualStyleBackColor = true;
+            this.btnSurrender.Click += new System.EventHandler(this.btnSurrender_Click);
             // 
             // btnExplain
             // 
@@ -427,6 +440,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnRestart;
         private System.Windows.Forms.Button btnExplain;
+        private System.Windows.Forms.Button btnSurrender;
     }
 }
 
